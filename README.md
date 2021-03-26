@@ -7,4 +7,6 @@ Los datos se obtuvieron de un "scraping" **automático** de diversas cuentas de 
 
 Esa primera selección y algunos gráficos pueden encontrarse en [este informe](https://app.workbenchdata.com/workflows/139477/report).
 
-En un segundo paso, los datos fueron curados **a mano** para obtener 96 titulares (de los diarios El País, El Mundo, El Español y Público) y algunos tuits de cuentas verificadas y con un mínimo de retuits.
+En un segundo paso, los datos fueron curados **a mano** para obtener 96 titulares (de los diarios El País, El Mundo, El Español y Público) y algunos tuits (de cuentas verificadas y con un mínimo de retuits).
+
+
