@@ -1,80 +1,134 @@
-// Inicia variables
-var c, myFont, re, song1;
+// Listas y variables necesarias
+var titulares = [];
+var words = [];
+var rojas = [];
 var value = 255;
-var titulares = []
+var re, x;
 
-// Carga previa de archivos
+// Carga lista de titulares y de ReGex
 function preload() {
   titulares = loadStrings("data/titulares.txt");
   re = loadStrings("data/regex.txt");
-  song1 = loadSound("data/paz.wav");
 }
 
-// Reordenamiento de texto al azar y música
-function loaded() {
-  shuffle(titulares, true);
-  song1.play();
-}
-
+// Llama a dispose y reordena al azar palabras bélicas
 function setup() {
-  c = createCanvas(windowWidth, windowHeight);
+  c = createCanvas(windowWidth, windowHeight-30);
   textFont('Special Elite', 18);
+  dispose();
+  shuffle(rojas, true);
+  textSize(18);
+  frameRate(5);
 }
 
 function draw() {
   background(255);
-  tachar(titulares);
+  mostrar();
 }
 
-function tachar(titulares) {
-  var reg = new RegExp(re);
+//Crea la clase Word para asociar color, x e y a cada palabra
+class Word {
+    constructor(word, x, y, idx) {
+      this.word = word;
+      this.x = x;
+      this.y = y;
+      this.idx = idx;
+      this.fcolor = color(90);
+    }
+
+    display() {
+      fill(this.fcolor);
+      text(this.word, this.x, this.y);
+    }
+}
+
+// Asigna coordenadas a cada palabra de cada titular
+function dispose() {
+  
+  shuffle(titulares, true);
   var x = 20;
   var y = 20;
   
-// Crea una lista de palabras para cada titular:  
-  for (let i = 0; i < titulares.length; i++){
-    var titular = titulares[i];
-    var palabras = titular.split(" ");
-    
-// Imprime en rojo palabras que cumplen condición RegEx y en blanco resto
-    for (let i = 0; i < palabras.length; i++) {
-      var palabra = palabras[i];
+  var reg = new RegExp(re);
 
-      if (reg.test(palabra.toLowerCase())) {
-        fill("red");
+// Filtra palabras bélicas, les asigna roja y las envía a nueva lista
+  for (var t = 0; t < titulares.length; t++){
+    
+    var palabras = titulares[t].split(' ');
+
+    for (var i = 0; i < palabras.length; i++) {
+      var palabra = palabras[i];
+      var ancho_palabra = textWidth(palabra);
+      var word = new Word(palabra, x, y, i);
+      
+      if (reg.test(word.word.toLowerCase())) {
+        word.fcolor = "red";
+        rojas.push(word);
       }
       else {
-        fill(value);
+        words.push(word);
       }
-      text(palabra, x, y);
-
-// Calcula posición de palabra siguiente
-      var ancho_palabra = textWidth(palabra);
-      x = x + ancho_palabra + textWidth(" ");
-      
-// Salto de línea si próxima palabra llega a final de pantalla
-      var ancho_prox_palabra = textWidth(palabras[i+1]);
-
-        if (x > windowWidth - ancho_prox_palabra - 20) {
-          y += 25;
-          x = 20;
-        }
+// Salto de línea cuando última palabra excede ancho de pantalla      
+      x = x + ancho_palabra + textWidth(' ');
+      const ancho_prox = textWidth(palabras[i+1]);
+      if (x > windowWidth - ancho_prox - 20) {
+        y += 35;
+        x = 20;
       }
-    
+    }
   }
 }
 
-// Va oscureciendo palabras en blanco al mover mouse
-function mouseMoved() {
-  if (value > 100) {
-    value = value - 3;
+// Pinta palabras en pantalla
+function mostrar() {
+
+// Palabra en grande en el centro
+  if (frameCount < rojas.length) {
+    fill(150);
+    textSize(50);
+    textAlign(CENTER);
+    text(rojas[frameCount].word, windowWidth/2, windowHeight/2); 
+    textSize(18);
+    textAlign(LEFT);
+
+// Palabra roja en su sitio, una a una
+    for (var n = 0; n < frameCount; n++){
+      rojas[n].display();
+    }
+  }
+// Todas las palabras en su sitio a la vez
+  else {
+    for (var j = 0; j < rojas.length; j++){
+      rojas[j].display();
+    }
+    for (var i = 0; i < words.length; i++){
+      words[i].fcolor = value;
+      words[i].display();
+    }
+
+// Cartel en el centro
+    rectMode(CENTER);
+    noStroke();
+    fill("rgba(255,0,0,0.8)");
+    rect(windowWidth/2,(windowHeight/2)-40,250, 40, 10, 10, 0, 0);
+    fill("rgba(0,0,0,0.8)");
+    rect(windowWidth/2,(windowHeight/2),250, 40, 0, 0, 10, 10);
+    textAlign(CENTER);
+    fill(0);
+    text("Mira el contexto:", windowWidth/2, (windowHeight/2)-30);
+    fill(255);
+    text("no es una guerra",windowWidth/2,(windowHeight/2)+5);
+    textAlign(LEFT);
   }
 }
-  
-// Reinicia con click
+
+// Vuelve a pintar en blanco los titulares
 function mouseClicked() {
   value = 255;
-  transp = 0;
-  shuffle(titulares, true);
-  song1.play();
+}
+
+// Varía color de titulares
+function mouseMoved(){
+  value = 'rgba(40,40,40,'+1/windowWidth*mouseX+')';
+  return false;
 }
