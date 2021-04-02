@@ -12,7 +12,7 @@ var value = 255;
 function preload() {
   titulares = loadStrings("data/titulares.txt");
   re = loadStrings("data/regex.txt");
-  a1 = createA('about.html', "(lista completa aquí)");
+  a1 = createA('https://public.flourish.studio/visualisation/5747032/', "(lista completa aquí)");
   a = createA('about.html', '( + )');
   a.style("color", "white");
   a.position(0,40);
