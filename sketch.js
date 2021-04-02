@@ -1,19 +1,29 @@
 // Listas y variables necesarias
+var re, x, nro, a, a1;
+var modo = "asc";
+var huboclick = 0;
+var horiz = 0;
 var titulares = [];
 var words = [];
 var rojas = [];
 var value = 255;
-var re, x;
 
 // Carga lista de titulares y de ReGex
 function preload() {
   titulares = loadStrings("data/titulares.txt");
   re = loadStrings("data/regex.txt");
+  a1 = createA('about.html', "(lista completa aquí)");
+  a = createA('about.html', '( + )');
+  a.style("color", "white");
+  a.position(0,40);
+  a1.style("color", "white");
+  a1.position(0,40);
 }
 
 // Llama a dispose y reordena al azar palabras bélicas
 function setup() {
-  c = createCanvas(windowWidth, windowHeight-30);
+  nro = titulares.length; //cantidad de titulares en lista
+  c = createCanvas(windowWidth, windowHeight-40);
   textFont('Special Elite', 18);
   dispose();
   shuffle(rojas, true);
@@ -23,7 +33,12 @@ function setup() {
 
 function draw() {
   background(255);
-  mostrar();
+  if (frameCount < rojas.length) {
+    mostrar1();
+  }
+  else {
+    mostrar2();
+  }
 }
 
 //Crea la clase Word para asociar color, x e y a cada palabra
@@ -42,16 +57,15 @@ class Word {
     }
 }
 
-// Asigna coordenadas a cada palabra de cada titular
+// Asigna coordenadas a cada palabra de cada titular (los 50 primeros escogidos al azar)
 function dispose() {
-  
   shuffle(titulares, true);
+  titulares = titulares.slice(1, 50);
   var x = 20;
   var y = 20;
-  
   var reg = new RegExp(re);
 
-// Filtra palabras bélicas, les asigna roja y las envía a nueva lista
+// Filtra palabras bélicas, les asigna categoría y color rojo y las envía a nueva lista
   for (var t = 0; t < titulares.length; t++){
     
     var palabras = titulares[t].split(' ');
@@ -79,56 +93,104 @@ function dispose() {
   }
 }
 
-// Pinta palabras en pantalla
-function mostrar() {
+// Pinta palabras en pantalla una a una
+function mostrar1() {
+  for (var n = 0; n < frameCount; n++){
+    rojas[n].display();
+  }
 
 // Palabra en grande en el centro
-  if (frameCount < rojas.length) {
-    fill(150);
-    textSize(50);
-    textAlign(CENTER);
-    text(rojas[frameCount].word, windowWidth/2, windowHeight/2); 
-    textSize(18);
-    textAlign(LEFT);
+  fill(150);
+  textAlign(CENTER);
+  var r = random(20, 60);
+  textSize(r);
+  text(rojas[frameCount].word, windowWidth/2, windowHeight/2); 
+  textSize(18);
+  textAlign(LEFT);
+}
 
-// Palabra roja en su sitio, una a una
-    for (var n = 0; n < frameCount; n++){
-      rojas[n].display();
-    }
+// Pinta círculos y textos a la vez
+function mostrar2() {
+  for (var j = 0; j < rojas.length; j++){
+    rojas[j].display();
   }
-// Todas las palabras en su sitio a la vez
+  for (var i = 0; i < words.length; i++){
+    words[i].fcolor = value;
+    words[i].display();
+  }
+
+// Círculos en el centro
+  noStroke();
+  fill("rgba(255,240,240,0.5)");
+  circle(windowWidth/2, windowHeight/2, 290);
+  fill("rgba(255,240,240,0.8)");
+  circle(windowWidth/2, windowHeight/2, 240);
+  
+  textAlign(CENTER);
+  fill(0);
+  textSize(20);
+  text("Mira el contexto:", windowWidth/2, (windowHeight/2)-30);
+  fill("red");
+  text("no es una guerra",windowWidth/2,(windowHeight/2)+40);
+  a.style("color", "black");
+  a.position((windowWidth-35)/2, (windowHeight+60)/2);  
+
+// Círculo con contador abajo a la derecha
+  fill("rgba(50,40,40,0.8)");
+  circle(windowWidth-50, windowHeight-50, 250);
+  textSize(10);
+  fill("white");
+  text("titulares recogidos", windowWidth-75, windowHeight-70);
+  a1.style("font-size", "10px");
+  a1.style("color", "white");
+  a1.position(windowWidth-130, windowHeight-30);
+  fill("red");
+  textSize(80);
+  text(nro, windowWidth-60, windowHeight-90);
+  textSize(18);
+  textAlign(LEFT);
+
+  if (huboclick != 1) {
+    instruccion();
+  }
+}
+
+function instruccion() {
+  stroke("black");
+  rectMode(CENTER);
+  fill("white");
+  rect(windowWidth/2, (windowHeight/2)+250, 300, 80, 20);
+  textAlign(CENTER);
+  noStroke();
+  fill("black");
+
+  if (modo == "asc" && horiz < 10) {
+    horiz = horiz + 1;
+  }
+  if (modo == "asc" && horiz == 10) {
+    horiz = horiz -1;
+    modo = "desc";
+  }
+  if (modo == "desc" && horiz > 0) {
+    horiz = horiz - 1;
+  }
   else {
-    for (var j = 0; j < rojas.length; j++){
-      rojas[j].display();
-    }
-    for (var i = 0; i < words.length; i++){
-      words[i].fcolor = value;
-      words[i].display();
-    }
-
-// Cartel en el centro
-    rectMode(CENTER);
-    noStroke();
-    fill("rgba(255,0,0,0.8)");
-    rect(windowWidth/2,(windowHeight/2)-40,250, 40, 10, 10, 0, 0);
-    fill("rgba(0,0,0,0.8)");
-    rect(windowWidth/2,(windowHeight/2),250, 40, 0, 0, 10, 10);
-    textAlign(CENTER);
-    fill(0);
-    text("Mira el contexto:", windowWidth/2, (windowHeight/2)-30);
-    fill(255);
-    text("no es una guerra",windowWidth/2,(windowHeight/2)+5);
-    textAlign(LEFT);
+    horiz = horiz + 1;
+    modo = "asc";
   }
+  text("Haz click y mueve el ratón", windowWidth/2+horiz, (windowHeight/2)+255);
+  textAlign(LEFT);
 }
 
 // Vuelve a pintar en blanco los titulares
 function mouseClicked() {
+  huboclick = 1;
   value = 255;
 }
 
-// Varía color de titulares
-function mouseMoved(){
-  value = 'rgba(40,40,40,'+1/windowWidth*mouseX+')';
+function mouseMoved() {
+  if (huboclick == 1) {
+    value = 'rgba(40,40,40,'+1/windowWidth*mouseX+')';
+  }
   return false;
 }
