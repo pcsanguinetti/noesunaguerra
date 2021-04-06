@@ -1,0 +1,20 @@
+# This is a basic workflow to help you get started with Actions
+name: Scrape  # The name of your Workflow
+
+on:
+  schedule:  # Tells Github to run this Workflow every night
+    - cron: "20:02"
+
+jobs:
+  scrape-latest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2.0.0
+        with:
+          python-version: '3.7'
+      # Tells Github to run the file `scraper.py` from your repository
+      - name: Run Scraper
+        run: python scrape_titulares.py
