@@ -28,16 +28,17 @@ function setup() {
   dispose();
   shuffle(rojas, true);
   textSize(18);
-  frameRate(5);
 }
 
 function draw() {
+  frameRate(frameCount/2);
   background(255);
   if (frameCount < rojas.length) {
     mostrar1();
   }
   else {
     mostrar2();
+    frameRate(5);
   }
 }
 
@@ -60,7 +61,7 @@ class Word {
 // Asigna coordenadas a cada palabra de cada titular (los 50 primeros escogidos al azar)
 function dispose() {
   shuffle(titulares, true);
-  titulares = titulares.slice(1, 50);
+  titulares = titulares.slice(1, 45);
   var x = 20;
   var y = 20;
   var reg = new RegExp(re);
@@ -104,7 +105,7 @@ function mostrar1() {
   textAlign(CENTER);
   var r = random(20, 60);
   textSize(r);
-  text(rojas[frameCount].word, windowWidth/2, windowHeight/2); 
+  text(rojas[frameCount-1].word, windowWidth/2, windowHeight/2); 
   textSize(18);
   textAlign(LEFT);
 }
@@ -145,8 +146,8 @@ function mostrar2() {
   a1.style("color", "white");
   a1.position(windowWidth-130, windowHeight-30);
   fill("red");
-  textSize(80);
-  text(nro, windowWidth-60, windowHeight-90);
+  textSize(60);
+  text(nro, windowWidth-65, windowHeight-90);
   textSize(18);
   textAlign(LEFT);
 
@@ -156,9 +157,10 @@ function mostrar2() {
 }
 
 function instruccion() {
-  stroke("black");
   rectMode(CENTER);
-  fill("white");
+  fill("rgba(255,200,200,0.4)");
+  rect(windowWidth/2, (windowHeight/2)+250, 320, 100, 30);
+  fill("rgba(255,255,255,0.8)");
   rect(windowWidth/2, (windowHeight/2)+250, 300, 80, 20);
   textAlign(CENTER);
   noStroke();
@@ -178,7 +180,8 @@ function instruccion() {
     horiz = horiz + 1;
     modo = "asc";
   }
-  text("Haz click y mueve el ratón", windowWidth/2+horiz, (windowHeight/2)+255);
+  text("Haz click y", windowWidth/2, (windowHeight/2)+245);
+  text("<- mueve el ratón ->", windowWidth/2+horiz, (windowHeight/2)+265);
   textAlign(LEFT);
 }
 
