@@ -15,7 +15,7 @@ soup = BeautifulSoup(contenido, 'html.parser')
 
 titulares = soup.find_all("div", class_="ue-c-cover-content__main")
 
-with open('titulares.csv', mode='w') as f:
+with open('data/titulares.csv', mode='w') as f:
     writer = csv.writer(f, delimiter=';')
     writer.writerow(["titular", "fecha", "diario"])
     for titular in titulares:
