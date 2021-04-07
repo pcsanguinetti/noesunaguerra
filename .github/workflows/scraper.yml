@@ -1,12 +1,8 @@
 name: Scraper
 
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
   schedule:
-    - cron: '50 * * * *'
+    - cron: '20 * * * *'
 
 jobs:
   scheduled:
