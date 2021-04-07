@@ -1,18 +1,21 @@
 // Listas y variables necesarias
 var re, x, nro, a, a1;
-var modo = "asc";
-var huboclick = 0;
-var horiz = 0;
 var titulares = [];
 var words = [];
 var rojas = [];
+var modo = "asc";
+var huboclick = 0;
+var horiz = 0;
 var value = 255;
+let url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-N4UIp8qZIfVN3MOGhzpsz1W2ZyeoYwhJSFjy7BCfnihbHXH86LOdYZawqBZvtKHeVrSEEFwAjvvF/pub?gid=1095013830&single=true&output=csv';
+let data;
 
 // Carga lista de titulares y de ReGex
 function preload() {
-  titulares = loadStrings("data/titulares.txt");
+  data = loadTable(url, 'csv', 'header');
+  //titulares = loadStrings("data/titulares.txt");
   re = loadStrings("data/regex.txt");
-  a1 = createA('https://public.flourish.studio/visualisation/5747032/', "(lista completa aquí)");
+  a1 = createA('https://public.flourish.studio/visualisation/5747032/', "(listado y links aquí)");
   a = createA('about.html', '( + )');
   a.style("color", "white");
   a.position(0,40);
@@ -22,6 +25,7 @@ function preload() {
 
 // Llama a dispose y reordena al azar palabras bélicas
 function setup() {
+  titulares = data.getColumn("todo");
   nro = titulares.length; //cantidad de titulares en lista
   c = createCanvas(windowWidth, windowHeight-40);
   textFont('Special Elite', 18);
