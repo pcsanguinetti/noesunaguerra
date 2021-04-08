@@ -1,14 +1,14 @@
 # No es una guerra
-## Repositorio del proyecto final para el curso "Poesía Algorítmica" de School of Machines
+## Proyecto final para el curso ["Poesía Algorítmica"](http://schoolofma.org/algorithmic-poetry.html) de School of Machines
 
-[No es una guerra](https://pcsanguinetti.github.io/noesunaguerra/) busca visibilizar el clima de polarización en España recogiendo ejemplos de lenguaje bélico usado por medios y políticos en los días previos y posteriores a la convocatoria de elecciones para el 4 de mayo en la Comunidad de Madrid.
+[No es una guerra](https://pcsanguinetti.github.io/noesunaguerra/) busca visibilizar el clima de polarización en España recogiendo ejemplos de lenguaje bélico usado por medios y políticos en los días previos y posteriores a la convocatoria de elecciones para el 4 de mayo de 2021 en la Comunidad de Madrid.
 
-Los datos se obtuvieron de un "scraping" **automático** de diversas cuentas de Twitter y de cinco diarios nacionales para obtener cientos de titulares vinculados a los principales candidatos y con palabras de campo semántico bélico.
+Los datos se obtienen con un "scraping" **automático** de cinco diarios nacionales, y entre esos cientos de titulares se filtran los que incluyen referencias a dos principales candidatos y palabras de campo semántico bélico ("guerra", "batalla", "asesinos", "bala", "sangría", etc).
 
-Esa primera selección y algunos gráficos pueden encontrarse en [este informe](https://app.workbenchdata.com/workflows/139477/report).
+Esa primera selección y algunos gráficos pueden encontrarse en [este informe](https://app.workbenchdata.com/workflows/139477/report), que incluye también una selección de tuits de cuentas de medios o verificadas.
 
-En un segundo paso, los datos fueron curados **a mano** para obtener titulares relevantes (de los diarios El País, El Mundo, ABC, El Español y Público/eldiario.es) y algunos tuits (de cuentas verificadas y con un mínimo de retuits).
+En un segundo paso, los datos son curados **a mano** para obtener titulares relevantes y descartar los incluidos por error en la selección automática.
 
-La lista completa de titulares seleccionados puede consultase [aquí](https://public.flourish.studio/visualisation/5747032/).
+La lista completa de titulares seleccionados e incluidos en la web puede consultarse [aquí](https://public.flourish.studio/visualisation/5747032/).
 
 
