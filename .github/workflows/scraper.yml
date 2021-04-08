@@ -1,8 +1,8 @@
 name: Scraper
 
-on:
-  schedule:
-    - cron: '3 10 * * *'
+#on:
+#  schedule:
+#    - cron: '3 10 * * *'
 
 jobs:
   scheduled:
