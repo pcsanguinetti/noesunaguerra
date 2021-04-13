@@ -1,5 +1,5 @@
 // Listas y variables necesarias
-var re, x, nro, a, a1;
+var re, x, nro, a, a1, data;
 var titulares = [];
 var words = [];
 var rojas = [];
@@ -7,8 +7,7 @@ var modo = "asc";
 var huboclick = 0;
 var horiz = 0;
 var value = 255;
-let url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-N4UIp8qZIfVN3MOGhzpsz1W2ZyeoYwhJSFjy7BCfnihbHXH86LOdYZawqBZvtKHeVrSEEFwAjvvF/pub?gid=1095013830&single=true&output=csv';
-let data;
+var url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-N4UIp8qZIfVN3MOGhzpsz1W2ZyeoYwhJSFjy7BCfnihbHXH86LOdYZawqBZvtKHeVrSEEFwAjvvF/pub?gid=1095013830&single=true&output=csv';
 
 // Carga lista de titulares y de ReGex
 function preload() {
@@ -18,9 +17,9 @@ function preload() {
   a1 = createA('https://public.flourish.studio/visualisation/5747032/', "(listado y links aquí)");
   a = createA('about.html', '( + )');
   a.style("color", "white");
-  a.position(0,40);
+  a.position(0,windowHeight);
   a1.style("color", "white");
-  a1.position(0,40);
+  a1.position(0,windowHeight);
 }
 
 // Llama a dispose y reordena al azar palabras bélicas
@@ -62,10 +61,10 @@ class Word {
     }
 }
 
-// Asigna coordenadas a cada palabra de cada titular (los 50 primeros escogidos al azar)
+// Asigna coordenadas a cada palabra de cada titular (los 40 primeros escogidos al azar)
 function dispose() {
   shuffle(titulares, true);
-  titulares = titulares.slice(1, 45);
+  titulares = titulares.slice(1, 40);
   var x = 20;
   var y = 20;
   var reg = new RegExp(re);
@@ -126,9 +125,9 @@ function mostrar2() {
 
 // Círculos en el centro
   noStroke();
-  fill("rgba(255,240,240,0.5)");
+  fill("rgba(255,240,240, 0.5)");
   circle(windowWidth/2, windowHeight/2, 290);
-  fill("rgba(255,240,240,0.8)");
+  fill("rgba(255,240,240, 0.8)");
   circle(windowWidth/2, windowHeight/2, 240);
   
   textAlign(CENTER);
