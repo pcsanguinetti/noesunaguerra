@@ -155,7 +155,7 @@ function mostrar2() {
 // Cuadrado con links arriba
   fill("rgba(200,220,200,0.8)");
   rectMode(CORNER);
-  rect(0, 0, 200, 50, 0, 0, 20, 0);
+  rect(0, 0, 150, 50, 0, 0, 20, 0);
 
   a.style("color", "black");
   a.style("opacity", "1");
