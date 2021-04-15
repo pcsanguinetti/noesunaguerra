@@ -1,5 +1,5 @@
 // Listas y variables necesarias
-var re, x, nro, a, a1, data;
+var re, x, nro, a, a1, a3, data;
 var titulares = [];
 var words = [];
 var rojas = [];
@@ -12,25 +12,24 @@ var url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-N4UIp8qZIfVN3MOGhz
 // Carga lista de titulares y de ReGex
 function preload() {
   data = loadTable(url, 'csv', 'header');
-  //titulares = loadStrings("data/titulares.txt");
+  img = loadImage("data/logogit.png");
   re = loadStrings("data/regex.txt");
   a1 = createA('https://public.flourish.studio/visualisation/5747032/', "(listado y links aquí)");
   a = createA('about.html', '( + )');
-  a.style("color", "white");
-  a.position(0,windowHeight);
-  a1.style("color", "white");
-  a1.position(0,windowHeight);
+  a3 = createA("https://github.com/pcsanguinetti/noesunaguerra", "github");
+  a.style("opacity", "0.0");
+  a1.style("opacity", "0.0");
+  a3.style("opacity", "0.0");
 }
 
 // Llama a dispose y reordena al azar palabras bélicas
 function setup() {
   titulares = data.getColumn("todo");
   nro = titulares.length; //cantidad de titulares en lista
-  c = createCanvas(windowWidth, windowHeight-40);
+  c = createCanvas(windowWidth, windowHeight);
   textFont('Special Elite', 18);
   dispose();
   shuffle(rojas, true);
-  textSize(18);
 }
 
 function draw() {
@@ -133,24 +132,37 @@ function mostrar2() {
   textAlign(CENTER);
   fill(0);
   textSize(20);
-  text("Mira el contexto:", windowWidth/2, (windowHeight/2)-30);
+  text("Mira el contexto:", windowWidth/2, (windowHeight/2)-20);
   fill("red");
-  text("no es una guerra",windowWidth/2,(windowHeight/2)+40);
-  a.style("color", "black");
-  a.position((windowWidth-35)/2, (windowHeight+60)/2);  
+  text("no es una guerra",windowWidth/2,(windowHeight/2)+30);
 
 // Círculo con contador abajo a la derecha
   fill("rgba(50,40,40,0.8)");
-  circle(windowWidth-50, windowHeight-50, 250);
+  circle(width-50, height-30, 250);
   textSize(10);
   fill("white");
-  text("titulares recogidos", windowWidth-75, windowHeight-70);
+  text("titulares recogidos", windowWidth-75, windowHeight-35);
   a1.style("font-size", "10px");
   a1.style("color", "white");
-  a1.position(windowWidth-130, windowHeight-30);
+  a1.position(windowWidth-130, windowHeight-25);
+  a1.style("opacity", "1");
   fill("red");
   textSize(60);
-  text(nro, windowWidth-65, windowHeight-90);
+  text(nro, windowWidth-65, windowHeight-60);
+  textSize(18);
+  textAlign(LEFT);
+
+// Cuadrado con links arriba
+  fill("rgba(200,220,200,0.8)");
+  rectMode(CORNER);
+  rect(0, 0, 200, 50, 0, 0, 20, 0);
+
+  a.style("color", "black");
+  a.style("opacity", "1");
+  a.style("font-size", "20px");
+  a.position(20, 20);
+  image(img, 70, 10, 30, 30);
+  a3.position(70, 10);
   textSize(18);
   textAlign(LEFT);
 
@@ -199,4 +211,8 @@ function mouseMoved() {
     value = 'rgba(40,40,40,'+1/windowWidth*mouseX+')';
   }
   return false;
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
