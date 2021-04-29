@@ -13,15 +13,8 @@ var url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-N4UIp8qZIfVN3MOGhz
 function preload() {
   data = loadTable(url, 'csv', 'header');
   re = loadStrings("data/regex.txt");
-<<<<<<< HEAD
   a1 = createA('https://github.com/pcsanguinetti/elecciones4M/blob/main/data/noesunaguerra.csv', "(listado aquí)");
   a3 = createA("https://github.com/pcsanguinetti/noesunaguerra", "código");
-=======
-  a1 = createA('https://public.flourish.studio/visualisation/5747032/', "(listado y links aquí)");
-  a = createA('about.html', '( + )');
-  a3 = createA("https://github.com/pcsanguinetti/noesunaguerra", "github");
-  a.style("opacity", "0.0");
->>>>>>> parent of e7daedf (new data source)
   a1.style("opacity", "0.0");
   a3.style("opacity", "0.0");
 }
@@ -159,7 +152,7 @@ function mostrar2() {
 // Cuadrado con links arriba
   fill("rgba(200,220,200,0.8)");
   rectMode(CORNER);
-  rect(0, 0, 150, 50, 0, 0, 20, 0);
+  rect(0, 0, 100, 50, 0, 0, 20, 0);
   a3.style("opacity", "1");
   a3.position(15, 15);
   textSize(18);
