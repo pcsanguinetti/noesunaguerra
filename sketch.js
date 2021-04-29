@@ -15,9 +15,7 @@ function preload() {
   img = loadImage("data/logogit.png");
   re = loadStrings("data/regex.txt");
   a1 = createA('https://github.com/pcsanguinetti/elecciones4M/blob/main/data/noesunaguerra.csv', "(listado aquí)");
-  a = createA('about.html', '( + )');
   a3 = createA("https://github.com/pcsanguinetti/noesunaguerra", "código");
-  a.style("opacity", "0.0");
   a1.style("opacity", "0.0");
   a3.style("opacity", "0.0");
 }
@@ -156,11 +154,7 @@ function mostrar2() {
   fill("rgba(200,220,200,0.8)");
   rectMode(CORNER);
   rect(0, 0, 150, 50, 0, 0, 20, 0);
-
-  a.style("color", "black");
-  a.style("opacity", "1");
-  a.style("font-size", "20px");
-  a.position(20, 20);
+  a3.style("opacity", "1");
   image(img, 70, 10, 30, 30);
   a3.position(70, 10);
   textSize(18);
