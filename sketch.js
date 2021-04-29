@@ -7,7 +7,7 @@ var modo = "asc";
 var huboclick = 0;
 var horiz = 0;
 var value = 255;
-var url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-N4UIp8qZIfVN3MOGhzpsz1W2ZyeoYwhJSFjy7BCfnihbHXH86LOdYZawqBZvtKHeVrSEEFwAjvvF/pub?gid=1095013830&single=true&output=csv';
+var url = 'https://raw.githubusercontent.com/pcsanguinetti/elecciones4M/main/data/noesunaguerra.csv';
 
 // Carga lista de titulares y de ReGex
 function preload() {
