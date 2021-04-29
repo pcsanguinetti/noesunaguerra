@@ -1,5 +1,5 @@
 // Listas y variables necesarias
-var re, x, nro, a, a1, a3, data;
+var re, x, nro, a1, a3, data;
 var titulares = [];
 var words = [];
 var rojas = [];
@@ -12,7 +12,6 @@ var url = 'https://raw.githubusercontent.com/pcsanguinetti/elecciones4M/main/dat
 // Carga lista de titulares y de ReGex
 function preload() {
   data = loadTable(url, 'csv', 'header');
-  img = loadImage("data/logogit.png");
   re = loadStrings("data/regex.txt");
   a1 = createA('https://github.com/pcsanguinetti/elecciones4M/blob/main/data/noesunaguerra.csv', "(listado aquí)");
   a3 = createA("https://github.com/pcsanguinetti/noesunaguerra", "código");
@@ -142,7 +141,7 @@ function mostrar2() {
   text("titulares recogidos", windowWidth-75, windowHeight-35);
   a1.style("font-size", "10px");
   a1.style("color", "white");
-  a1.position(windowWidth-130, windowHeight-25);
+  a1.position(windowWidth-130, windowHeight-20);
   a1.style("opacity", "1");
   fill("red");
   textSize(60);
@@ -155,8 +154,7 @@ function mostrar2() {
   rectMode(CORNER);
   rect(0, 0, 150, 50, 0, 0, 20, 0);
   a3.style("opacity", "1");
-  image(img, 70, 10, 30, 30);
-  a3.position(70, 10);
+  a3.position(15, 15);
   textSize(18);
   textAlign(LEFT);
 
